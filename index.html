@@ -4,33 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enterprise GenAI Architecture Hub | Adamson-lab</title>
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: #030712; color: #f3f4f6; min-height: 100vh; display: flex; flex-direction: column; }
         .code-font { font-family: 'Fira Code', monospace; }
-        .glass-panel { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(75, 85, 99, 0.4); }
+        .glass-panel { background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(75, 85, 99, 0.4); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); }
+        header { background-color: #111827; border-bottom: 1px solid #1f2937; position: sticky; top: 0; z-index: 50; }
+        .max-w-7xl { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+        .nav-container { height: 4rem; display: flex; align-items: center; justify-content: space-between; }
+        main { flex: 1; max-width: 80rem; width: 100%; margin: 0 auto; padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 2rem; }
+        .hero { background: linear-gradient(135deg, rgba(30, 27, 75, 0.6) 0%, rgba(15, 23, 42, 0.9) 100%); border-radius: 1.5rem; padding: 2.5rem; border: 1px solid rgba(99, 102, 241, 0.3); position: relative; overflow: hidden; }
+        .btn-primary { background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%); color: white; padding: 0.75rem 1.25rem; border-radius: 0.75rem; font-weight: 500; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: opacity 0.2s; text-decoration: none; font-size: 0.875rem; }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-secondary { background-color: #1f2937; color: #e5e7eb; padding: 0.75rem 1.25rem; border-radius: 0.75rem; font-weight: 500; border: 1px solid #374151; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s; text-decoration: none; font-size: 0.875rem; }
+        .btn-secondary:hover { background-color: #374151; }
+        .tabs { display: flex; border-bottom: 1px solid #1f2937; gap: 2rem; margin-bottom: 1rem; }
+        .tab-btn { background: none; border: none; color: #9ca3af; padding-bottom: 0.75rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; display: flex; align-items: center; gap: 0.5rem; }
+        .tab-btn.active { color: #818cf8; border-bottom-color: #6366f1; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+        .hidden { display: none !important; }
+        select, input { background-color: #030712; border: 1px solid #374151; color: white; padding: 0.75rem; border-radius: 0.5rem; width: 100%; margin-top: 0.5rem; font-size: 0.875rem; }
+        footer { background-color: #111827; border-top: 1px solid #1f2937; padding: 1.5rem 0; text-align: center; font-size: 0.75rem; color: #9ca3af; margin-top: auto; }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col">
+<body>
     <!-- Navigation Bar -->
-    <header class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-                    <i class="fa-solid fa-network-wired text-white text-lg"></i>
+    <header>
+        <div class="max-w-7xl nav-container">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div style="width: 2.5rem; height: 2.5rem; border-radius: 0.5rem; background: linear-gradient(135deg, #4f46e5, #06b6d4); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);">
+                    <i class="fa-solid fa-network-wired" style="color: white; font-size: 1rem;"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-200 to-cyan-400">Enterprise GenAI Architecture Hub</h1>
-                    <p class="text-xs text-gray-400">Adamson-lab / Reference Patterns & Reusable Accelerators</p>
+                    <h1 style="font-weight: 700; font-size: 1.125rem; background: linear-gradient(90deg, #ffffff, #818cf8, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Enterprise GenAI Architecture Hub</h1>
+                    <p style="font-size: 0.75rem; color: #9ca3af;">Adamson-lab / Reference Patterns & Reusable Accelerators</p>
                 </div>
             </div>
-            <div class="flex items-center space-x-4">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-950 text-indigo-300 border border-indigo-800">
-                    <i class="fa-solid fa-circle text-cyan-400 text-[8px] mr-2 animate-pulse"></i> v2.5.0-Enterprise
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span style="display: inline-flex; align-items: center; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; background-color: #1e1b4b; color: #c7d2fe; border: 1px solid #3730a3;">
+                    <i class="fa-solid fa-circle" style="color: #22d3ee; font-size: 6px; margin-right: 0.5rem;"></i> v2.5.0-Enterprise
                 </span>
-                <a href="https://github.com/Adamson-lab" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-gray-200 px-4 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2 border border-gray-700">
+                <a href="https://github.com/Adamson-lab" target="_blank" class="btn-secondary">
                     <i class="fa-brands fa-github"></i>
                     <span>GitHub Repository</span>
                 </a>
@@ -39,24 +56,22 @@
     </header>
 
     <!-- Main Content Hub -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <main>
         <!-- Hero Section -->
-        <div class="glass-panel rounded-2xl p-8 relative overflow-hidden shadow-2xl">
-            <div class="absolute -right-10 -bottom-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -left-10 -top-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="relative z-10 max-w-3xl">
-                <span class="text-xs font-semibold tracking-wider text-cyan-400 uppercase">Target-State Architecture Framework</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 tracking-tight">Enterprise GenAI Programs & Reference Patterns</h2>
-                <p class="text-gray-300 mt-4 text-base leading-relaxed">
+        <div class="hero">
+            <div style="max-width: 48rem; position: relative; z-index: 10;">
+                <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; color: #22d3ee; text-transform: uppercase;">Target-State Architecture Framework</span>
+                <h2 style="font-size: 2.25rem; font-weight: 800; color: white; margin-top: 0.5rem; line-height: 1.2;">Enterprise GenAI Programs & Reference Patterns</h2>
+                <p style="color: #d1d5db; margin-top: 1rem; font-size: 1rem; line-height: 1.6;">
                     Comprehensive target-state AI, data, and application architecture patterns designed for enterprise-grade security, deterministic guardrails, low-latency multi-region vector databases, and production LLM orchestration.
                 </p>
-                <div class="mt-6 flex flex-wrap gap-4">
-                    <button onclick="switchTab('explorer')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition shadow-lg shadow-indigo-600/30 flex items-center space-x-2">
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button onclick="switchTab('explorer')" class="btn-primary">
                         <i class="fa-solid fa-cubes"></i>
                         <span>Explore Architecture Layers</span>
                     </button>
-                    <button onclick="switchTab('builder')" class="bg-gray-800 hover:bg-gray-700 text-gray-200 px-5 py-2.5 rounded-xl font-medium text-sm transition border border-gray-700 flex items-center space-x-2">
-                        <i class="fa-solid fa-wand-magic-sparkles text-cyan-400"></i>
+                    <button onclick="switchTab('builder')" class="btn-secondary">
+                        <i class="fa-solid fa-wand-magic-sparkles" style="color: #22d3ee;"></i>
                         <span>Launch Architecture Builder</span>
                     </button>
                 </div>
@@ -64,140 +79,138 @@
         </div>
 
         <!-- Navigation Tabs -->
-        <div class="flex border-b border-gray-800 space-x-8">
-            <button onclick="switchTab('explorer')" id="tab-explorer" class="pb-3 text-sm font-semibold border-b-2 border-indigo-500 text-indigo-400 transition flex items-center space-x-2">
+        <div class="tabs">
+            <button onclick="switchTab('explorer')" id="tab-explorer" class="tab-btn active">
                 <i class="fa-solid fa-sitemap"></i>
                 <span>Architecture Explorer</span>
             </button>
-            <button onclick="switchTab('patterns')" id="tab-patterns" class="pb-3 text-sm font-semibold border-b-2 border-transparent text-gray-400 hover:text-gray-200 transition flex items-center space-x-2">
+            <button onclick="switchTab('patterns')" id="tab-patterns" class="tab-btn">
                 <i class="fa-solid fa-book-bookmark"></i>
                 <span>Reference Patterns</span>
             </button>
-            <button onclick="switchTab('accelerators')" id="tab-accelerators" class="pb-3 text-sm font-semibold border-b-2 border-transparent text-gray-400 hover:text-gray-200 transition flex items-center space-x-2">
+            <button onclick="switchTab('accelerators')" id="tab-accelerators" class="tab-btn">
                 <i class="fa-solid fa-rocket"></i>
                 <span>Reusable Accelerators</span>
             </button>
-            <button onclick="switchTab('builder')" id="tab-builder" class="pb-3 text-sm font-semibold border-b-2 border-transparent text-gray-400 hover:text-gray-200 transition flex items-center space-x-2">
+            <button onclick="switchTab('builder')" id="tab-builder" class="tab-btn">
                 <i class="fa-solid fa-hammer"></i>
                 <span>Interactive Builder</span>
             </button>
         </div>
 
         <!-- Tab 1: Architecture Explorer -->
-        <div id="content-explorer" class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-panel p-6 rounded-xl border border-gray-800 hover:border-indigo-500/50 transition">
-                    <div class="w-12 h-12 rounded-lg bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl mb-4">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">1. Governance & Guardrails Layer</h3>
-                    <p class="text-gray-400 text-sm mt-2">Zero-Trust perimeter enforcement, PII masking, NeMo Guardrails, content filtering, and prompt injection mitigation before requests hit core LLM gateways.</p>
+        <div id="content-explorer" class="grid-3">
+            <div class="glass-panel">
+                <div style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: rgba(99, 102, 241, 0.2); color: #818cf8; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 1rem;">
+                    <i class="fa-solid fa-shield-halved"></i>
                 </div>
-                <div class="glass-panel p-6 rounded-xl border border-gray-800 hover:border-cyan-500/50 transition">
-                    <div class="w-12 h-12 rounded-lg bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-xl mb-4">
-                        <i class="fa-solid fa-brain"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">2. Model Orchestration & RAG</h3>
-                    <p class="text-gray-400 text-sm mt-2">Hybrid semantic search, Milvus/Qdrant vector stores, LangGraph multi-agent routing, LiteLLM gateway, and caching proxies for sub-second inference.</p>
+                <h3 style="font-size: 1.125rem; font-weight: 700; color: white;">1. Governance & Guardrails Layer</h3>
+                <p style="color: #9ca3af; font-size: 0.875rem; margin-top: 0.5rem; line-height: 1.5;">Zero-Trust perimeter enforcement, PII masking, NeMo Guardrails, content filtering, and prompt injection mitigation before requests hit core LLM gateways.</p>
+            </div>
+            <div class="glass-panel">
+                <div style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: rgba(6, 182, 212, 0.2); color: #22d3ee; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 1rem;">
+                    <i class="fa-solid fa-brain"></i>
                 </div>
-                <div class="glass-panel p-6 rounded-xl border border-gray-800 hover:border-purple-500/50 transition">
-                    <div class="w-12 h-12 rounded-lg bg-purple-600/20 text-purple-400 flex items-center justify-center text-xl mb-4">
-                        <i class="fa-solid fa-database"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">3. Enterprise Data Fabric</h3>
-                    <p class="text-gray-400 text-sm mt-2">Real-time Kafka ingestion pipelines, Apache Iceberg data lakes, semantic caching layers, and automated fine-tuning dataset generation.</p>
+                <h3 style="font-size: 1.125rem; font-weight: 700; color: white;">2. Model Orchestration & RAG</h3>
+                <p style="color: #9ca3af; font-size: 0.875rem; margin-top: 0.5rem; line-height: 1.5;">Hybrid semantic search, Milvus/Qdrant vector stores, LangGraph multi-agent routing, LiteLLM gateway, and caching proxies for sub-second inference.</p>
+            </div>
+            <div class="glass-panel">
+                <div style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: rgba(168, 85, 247, 0.2); color: #c084fc; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 1rem;">
+                    <i class="fa-solid fa-database"></i>
                 </div>
+                <h3 style="font-size: 1.125rem; font-weight: 700; color: white;">3. Enterprise Data Fabric</h3>
+                <p style="color: #9ca3af; font-size: 0.875rem; margin-top: 0.5rem; line-height: 1.5;">Real-time Kafka ingestion pipelines, Apache Iceberg data lakes, semantic caching layers, and automated fine-tuning dataset generation.</p>
             </div>
         </div>
 
         <!-- Tab 2: Reference Patterns -->
-        <div id="content-patterns" class="hidden space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-panel p-6 rounded-xl border border-gray-800">
-                    <span class="text-xs font-semibold text-indigo-400 bg-indigo-950 px-2.5 py-1 rounded-md">Pattern A-1</span>
-                    <h3 class="text-xl font-bold text-white mt-3">Secure Enterprise RAG with Hybrid Retrieval</h3>
-                    <p class="text-gray-300 text-sm mt-2">End-to-end reference architecture combining dense vector search with sparse BM25 keyword matching, rerankers, and row-level access control filters.</p>
-                    <div class="mt-4 pt-4 border-t border-gray-800 flex justify-between items-center text-xs text-gray-400">
-                        <span>Status: Production Ready</span>
-                        <a href="https://github.com/Adamson-lab" target="_blank" class="text-indigo-400 hover:underline">View Blueprint &rarr;</a>
-                    </div>
+        <div id="content-patterns" class="grid-2 hidden">
+            <div class="glass-panel" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span style="font-size: 0.75rem; font-weight: 600; color: #818cf8; background: #1e1b4b; padding: 0.25rem 0.5rem; border-radius: 0.375rem;">Pattern A-1</span>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-top: 0.75rem;">Secure Enterprise RAG with Hybrid Retrieval</h3>
+                    <p style="color: #d1d5db; font-size: 0.875rem; margin-top: 0.5rem; line-height: 1.5;">End-to-end reference architecture combining dense vector search with sparse BM25 keyword matching, rerankers, and row-level access control filters.</p>
                 </div>
-                <div class="glass-panel p-6 rounded-xl border border-gray-800">
-                    <span class="text-xs font-semibold text-cyan-400 bg-cyan-950 px-2.5 py-1 rounded-md">Pattern A-2</span>
-                    <h3 class="text-xl font-bold text-white mt-3">Autonomous Multi-Agent Copilot Gateway</h3>
-                    <p class="text-gray-300 text-sm mt-2">Multi-agent orchestrator utilizing LangGraph and FastAPI with asynchronous streaming buffers, human-in-the-loop approvals, and OpenTelemetry tracing.</p>
-                    <div class="mt-4 pt-4 border-t border-gray-800 flex justify-between items-center text-xs text-gray-400">
-                        <span>Status: Production Ready</span>
-                        <a href="https://github.com/Adamson-lab" target="_blank" class="text-cyan-400 hover:underline">View Blueprint &rarr;</a>
-                    </div>
+                <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #374151; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #9ca3af;">
+                    <span>Status: Production Ready</span>
+                    <a href="https://github.com/Adamson-lab" target="_blank" style="color: #818cf8; text-decoration: none;">View Blueprint &rarr;</a>
+                </div>
+            </div>
+            <div class="glass-panel" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span style="font-size: 0.75rem; font-weight: 600; color: #22d3ee; background: #083344; padding: 0.25rem 0.5rem; border-radius: 0.375rem;">Pattern A-2</span>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-top: 0.75rem;">Autonomous Multi-Agent Copilot Gateway</h3>
+                    <p style="color: #d1d5db; font-size: 0.875rem; margin-top: 0.5rem; line-height: 1.5;">Multi-agent orchestrator utilizing LangGraph and FastAPI with asynchronous streaming buffers, human-in-the-loop approvals, and OpenTelemetry tracing.</p>
+                </div>
+                <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #374151; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #9ca3af;">
+                    <span>Status: Production Ready</span>
+                    <a href="https://github.com/Adamson-lab" target="_blank" style="color: #22d3ee; text-decoration: none;">View Blueprint &rarr;</a>
                 </div>
             </div>
         </div>
 
         <!-- Tab 3: Reusable Accelerators -->
-        <div id="content-accelerators" class="hidden space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-panel p-6 rounded-xl border border-gray-800">
-                    <h4 class="font-bold text-white text-lg">FastAPI GenAI Middleware</h4>
-                    <p class="text-gray-400 text-sm mt-2">Ready-to-use Python middleware for stream buffering, token quota throttling, and PII redaction.</p>
-                    <div class="mt-4 text-xs code-font text-indigo-400 bg-gray-900 p-2 rounded">pip install adamson-genai-middleware</div>
-                </div>
-                <div class="glass-panel p-6 rounded-xl border border-gray-800">
-                    <h4 class="font-bold text-white text-lg">Vector DB Benchmark Suite</h4>
-                    <p class="text-gray-400 text-sm mt-2">Automated benchmarking script for Qdrant, Milvus, and pgvector latency and recall evaluation.</p>
-                    <div class="mt-4 text-xs code-font text-indigo-400 bg-gray-900 p-2 rounded">python benchmark_vectors.py</div>
-                </div>
-                <div class="glass-panel p-6 rounded-xl border border-gray-800">
-                    <h4 class="font-bold text-white text-lg">Guardrails Evaluation CLI</h4>
-                    <p class="text-gray-400 text-sm mt-2">CLI tool to test prompt injection defenses and hallucination scoring against golden test sets.</p>
-                    <div class="mt-4 text-xs code-font text-indigo-400 bg-gray-900 p-2 rounded">adamson-eval --suite security</div>
-                </div>
+        <div id="content-accelerators" class="grid-3 hidden">
+            <div class="glass-panel">
+                <h4 style="font-weight: 700; color: white; font-size: 1.125rem;">FastAPI GenAI Middleware</h4>
+                <p style="color: #9ca3af; font-size: 0.875rem; margin-top: 0.5rem;">Ready-to-use Python middleware for stream buffering, token quota throttling, and PII redaction.</p>
+                <div style="margin-top: 1rem; font-size: 0.75rem;" class="code-font" style="color: #818cf8; background: #030712; padding: 0.5rem; border-radius: 0.375rem; border: 1px solid #1f2937;">pip install adamson-genai-middleware</div>
+            </div>
+            <div class="glass-panel">
+                <h4 style="font-weight: 700; color: white; font-size: 1.125rem;">Vector DB Benchmark Suite</h4>
+                <p style="color: #9ca3af; font-size: 0.875rem; margin-top: 0.5rem;">Automated benchmarking script for Qdrant, Milvus, and pgvector latency and recall evaluation.</p>
+                <div style="margin-top: 1rem; font-size: 0.75rem;" class="code-font" style="color: #818cf8; background: #030712; padding: 0.5rem; border-radius: 0.375rem; border: 1px solid #1f2937;">python benchmark_vectors.py</div>
+            </div>
+            <div class="glass-panel">
+                <h4 style="font-weight: 700; color: white; font-size: 1.125rem;">Guardrails Evaluation CLI</h4>
+                <p style="color: #9ca3af; font-size: 0.875rem; margin-top: 0.5rem;">CLI tool to test prompt injection defenses and hallucination scoring against golden test sets.</p>
+                <div style="margin-top: 1rem; font-size: 0.75rem;" class="code-font" style="color: #818cf8; background: #030712; padding: 0.5rem; border-radius: 0.375rem; border: 1px solid #1f2937;">adamson-eval --suite security</div>
             </div>
         </div>
 
         <!-- Tab 4: Interactive Architecture Builder -->
-        <div id="content-builder" class="hidden space-y-6">
-            <div class="glass-panel p-6 rounded-xl border border-gray-800 space-y-6">
-                <h3 class="text-xl font-bold text-white">Interactive Enterprise Architecture Configurator</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div id="content-builder" class="hidden">
+            <div class="glass-panel" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: white;">Interactive Enterprise Architecture Configurator</h3>
+                <div class="grid-3">
                     <div>
-                        <label class="block text-sm font-medium text-gray-300">LLM Gateway Provider</label>
-                        <select id="builder-llm" class="mt-2 w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white">
+                        <label style="font-size: 0.875rem; font-weight: 500; color: #d1d5db;">LLM Gateway Provider</label>
+                        <select id="builder-llm">
                             <option>Azure OpenAI Service (Enterprise)</option>
                             <option>AWS Bedrock (Claude 3.5 Sonnet)</option>
                             <option>Self-Hosted Llama 3.3 70B (vLLM)</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-300">Vector Database</label>
-                        <select id="builder-vector" class="mt-2 w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white">
+                        <label style="font-size: 0.875rem; font-weight: 500; color: #d1d5db;">Vector Database</label>
+                        <select id="builder-vector">
                             <option>Qdrant Enterprise Cluster</option>
                             <option>Milvus Distributed Vector DB</option>
                             <option>PostgreSQL + pgvector</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-300">Guardrails Engine</label>
-                        <select id="builder-guard" class="mt-2 w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white">
+                        <label style="font-size: 0.875rem; font-weight: 500; color: #d1d5db;">Guardrails Engine</label>
+                        <select id="builder-guard">
                             <option>NVIDIA NeMo Guardrails + Presidio PII</option>
                             <option>Llama Guard 3.0 + Custom Policy Engine</option>
                         </select>
                     </div>
                 </div>
-                <div class="pt-4 flex justify-end">
-                    <button onclick="generateArchitectureBlueprint()" class="bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-medium px-6 py-2.5 rounded-xl text-sm transition shadow-lg">
+                <div style="display: flex; justify-content: flex-end; padding-top: 1rem;">
+                    <button onclick="generateArchitectureBlueprint()" class="btn-primary">
                         Generate & Export Architecture JSON
                     </button>
                 </div>
-                <div id="builder-output" class="hidden mt-4 bg-gray-900 p-4 rounded-xl border border-gray-800 code-font text-xs text-cyan-300 overflow-x-auto"></div>
+                <div id="builder-output" class="hidden" style="margin-top: 1rem; background: #030712; padding: 1rem; border-radius: 0.75rem; border: 1px solid #374151; font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #22d3ee; overflow-x: auto;"></div>
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800 mt-auto py-6">
-        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-400">
-            Enterprise GenAI Architecture Hub &bull; Maintained by <a href="https://github.com/Adamson-lab" target="_blank" class="text-indigo-400 hover:underline">Adamson-lab</a> &bull; Production Ready
+    <footer>
+        <div class="max-w-7xl">
+            Enterprise GenAI Architecture Hub &bull; Maintained by <a href="https://github.com/Adamson-lab" target="_blank" style="color: #818cf8; text-decoration: none;">Adamson-lab</a> &bull; Production Ready
         </div>
     </footer>
 
@@ -205,12 +218,10 @@
         function switchTab(tabId) {
             ['explorer', 'patterns', 'accelerators', 'builder'].forEach(id => {
                 document.getElementById('content-' + id).classList.add('hidden');
-                document.getElementById('tab-' + id).classList.remove('border-indigo-500', 'text-indigo-400');
-                document.getElementById('tab-' + id).classList.add('border-transparent', 'text-gray-400');
+                document.getElementById('tab-' + id).classList.remove('active');
             });
             document.getElementById('content-' + tabId).classList.remove('hidden');
-            document.getElementById('tab-' + tabId).classList.add('border-indigo-500', 'text-indigo-400');
-            document.getElementById('tab-' + tabId).classList.remove('border-transparent', 'text-gray-400');
+            document.getElementById('tab-' + tabId).classList.add('active');
         }
 
         function generateArchitectureBlueprint() {
